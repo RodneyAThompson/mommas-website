@@ -1,12 +1,10 @@
 import React from "react";
-import style from "./style.scss";
-
+import './style.scss'
 
 export class Login extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <div className="base-container" ref={this.props.containerRef}>
@@ -32,7 +30,7 @@ export class Login extends React.Component {
             </div>
           </div>
           <div className="footer">
-            <button type="button" className="btn">
+            <button type="button" className="btn" onClick={()=>{this.props.signInUser()}}>
               Login
             </button>
           </div>

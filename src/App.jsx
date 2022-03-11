@@ -1,74 +1,33 @@
 import "./App.scss";
-import { Login } from "./components/Login.jsx";
-import { Register } from "./components/Register.jsx";
-import React from "react";
+import React, { useState } from "react";
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import LoginPage from "./components/LoginPage";
+import Homepage from './components/Homepage';
+import Bookings from './components/Booking';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoginActive: true,
-    };
+function App() {
+  const navigate = useNavigate();
+
+  function loginSetter(/* pass in username and password */) {
+    // send the user to the /homepage
+    // make an axios request to the server, sending both the username and the password (use a post req)
+    // upon a success, navigate to /homepage
+    // upon a faliure, tell the user that something went wrong
+    navigate("/homepage");
   }
 
-  componentDidMount() {
-    //Add .right by default
-    this.RightSide.classList.add("right");
-  }
-
-  changeState() {
-    const { isLoginActive } = this.state;
-    if (isLoginActive) {
-      this.RightSide.classList.remove("right");
-      this.RightSide.classList.add("left");
-    } else {
-      this.RightSide.classList.remove("left");
-      this.RightSide.classList.add("right");
-    }
-
-    this.setState({ isLoginActive: !isLoginActive });
-    console.log ('stateChange')
-  }
-
-  render() {
-    const { isLoginActive } = this.state;
-    const current = isLoginActive ? "Register" : "Login";
-    const currentActive = isLoginActive ? "Login" : "Register";
-    return (
-      <div className="App">
-        <div className="Login">
-          <div className="container" ref={(ref) => (this.container = ref)}>
-            {isLoginActive && (
-              <Login containerRef={(ref) => (this.current = ref)} />
-            )}
-            {!isLoginActive && (
-              <Register containerRef={(ref) => (this.current = ref)} />
-            )}
-          </div>
-          <RightSide
-            current={current}
-            currentActive={currentActive}
-            containerRef={(ref) => (this.RightSide = ref)}
-            handleClick={this.changeState.bind(this)}
-          />
-        </div>
-      </div>
-    );
-  }
-}
-
-const RightSide = (props) => {
   return (
-    <div
-      className="right-side"
-      ref={props.containerRef}
-      onClick={() => {props.handleClick()}}
-    >
-      <div className="inner-container">
-        <div className="text">{props.current}</div>
-      </div>
+    <div className="App">
+      {/* put website header here */}
+      <Routes>
+        <Route path='/' element={<LoginPage setLoggedIn={loginSetter}/>}/> 
+        <Route path='/homepage' element={<Homepage />}/> 
+        <Route path='/bookings' element={<Bookings />}/> 
+      </Routes>
+      {/* put website footer here */}
     </div>
   );
-};
+}
+
 
 export default App;
