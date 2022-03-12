@@ -30,7 +30,10 @@ export class Login extends React.Component {
             </div>
           </div>
           <div className="footer">
-            <button type="button" className="btn" onClick={()=>{this.props.signInUser()}}>
+            {/* <button type="button" className="btn" onClick={()=>{this.props.signInUser()}}> */}
+              Login
+            {/* </button> */}
+            <button className="btn" type='button'>
               Login
             </button>
           </div>

@@ -20,6 +20,19 @@ module.exports = {
         if (existingUser[0]) {
             return res.status(409).send("Username is already taken!") 
         } 
+
+        const salt = bcrypt.genSaltSync(10); 
+        const hash = bcrypt.hashSync(password, salt); 
+
+        const newUser = await db.register_user([username, email, hash]); 
+        delete newUser[0].password 
+
+        req.session.user = {
+            userId: newUser[0].id, 
+            username: newUser[0].username, 
+            email: newUser[0].email            
+        };
+        req.status(200).send(req.session.user)
     },
 
     login: (req, res) => {
@@ -31,5 +44,23 @@ module.exports = {
         // upon successful username match, we re-encrypt the password that was sent, and compare it to the password that is attached to the succesfully found username
         // if a password match is found, then give the OK for the user to login
             // otherwise, we tell the user that their password was incorrect
+
+            const db = req.app.get('db');
+            const {username, password} = req.body 
+            const existingUser = await db.check_user_for_login(username);
+            if (!existingUser[0]) {
+                return res.status(409).send("Username does not exist!") 
+            }
+            
+            if (bcrypt.compareSync(password, existingUser[0][0].password)){
+                let userInfo = {
+                    id: existingUser[0][0].id,
+                    username: existingUser[0][0].username 
+                }
+                res.status(200).send(userInfo)
+
+            } else {
+                res.status(401).send('Password is incorrect!')
+            }
     }
 }
