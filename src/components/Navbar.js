@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Navbar.css';
-import { Link } from 'react-route-dom';
+import { Link } from 'react-router-dom';
 
 function Nav(props) {
     return(

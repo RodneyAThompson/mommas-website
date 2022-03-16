@@ -6,18 +6,58 @@
     align-items: center;
 }
 
-.services {
-    border: 2px solid #d68923;
-    width: 200px;
+.sign-up{
+    width: 100%;
+    height: 450px;
     text-align: center;
-    margin-bottom: 20px;
-    margin-top: 250px;
-    
+}
+
+#title{
+    color: #d68923;
+    font-size: 30px;
+}
+
+#bio{
+    font-size: 25px;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 65px;
 }
 
 .about-me {
-    border: 2px solid #d68923;
-    width: 200px;
+    width: 98%;
+    height: 450px;
+    background-color: #d68923;
     text-align: center;
-    margin-bottom: 20px;
+}
+
+#abt-me{
+    font-size: 30px;
+    color: white;
+    margin-left: 50%;
+}
+
+#abt-section{
+    margin-right: 150px;
+    font-size: 20px;
+    margin-left: 58%;
+    margin-top: 60px;
+}
+
+.services {
+    width: 100%;
+    height: 450px;
+    text-align: center;
+    
+}
+
+#services-title{
+    color: #d68923;
+    margin-right: 50%;
+}
+
+#service-section{
+    margin-right: 58%;
+    font-size: 20px;
+    margin-left: 150px;
 }
